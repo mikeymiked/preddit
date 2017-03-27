@@ -18,19 +18,19 @@ $mech->agent_alias('Mac Mozilla');
 
 #Provide a sub and limit to scrape on the command line. If no sub or limit provided, default to /r/all and 100
 my $sub = '';
-my $limit = '';
+my $limit;
 
-GetOptions('sub=s' => \$sub);
-GetOptions('limit=n' => \$limit);
+GetOptions('sub=s' => \$sub,
+            'limit=i' => \$limit);
 
 if (!$sub) {
     $sub = 'all';
     print "No sub provided. Scraping /r/all...\n";
 }
 
-if (!$limit or $limit gt 100) {
+if (!defined($limit) || $limit > 100) {
     $limit = 100;
-    print "No limit provided or greater than 100. Defaulting to 100...\n"
+    print "No limit provided or greater than 100. Defaulting to 100...\n";
 }
 
 $mech->get("https://www.reddit.com/r/$sub/top/.json?sort=top&t=day&limit=100");
