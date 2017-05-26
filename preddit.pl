@@ -21,7 +21,7 @@ my $sub = '';
 my $limit;
 
 GetOptions('sub=s' => \$sub,
-            'limit=i' => \$limit);
+            'limit=i' => \          $limit);
 
 if (!$sub) {
     $sub = 'all';
@@ -33,7 +33,7 @@ if (!defined($limit) || $limit > 100) {
     print "No limit provided or greater than 100. Defaulting to 100...\n";
 }
 
-$mech->get("https://www.reddit.com/r/$sub/top/.json?sort=top&t=day&limit=100");
+$mech->get("https://www.reddit.com/r/$sub/top/.json?sort=top&t=day&limit=$limit");
 
 my $json = JSON::PP->new()->decode($mech->content());
 
