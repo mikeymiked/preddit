@@ -17,13 +17,13 @@ my $mech = WWW::Mechanize->new();
 $mech->agent_alias('Mac Mozilla');
 
 #Provide a sub and limit to scrape on the command line. If no sub or limit provided, default to /r/all and 100
-my $sub = '';
+my $sub;
 my $limit;
 
 GetOptions('sub=s' => \$sub,
             'limit=i' => \          $limit);
 
-if (!$sub) {
+if (!defined($sub)) {
     $sub = 'all';
     print "No sub provided. Scraping /r/all...\n";
 }
