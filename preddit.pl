@@ -6,7 +6,6 @@ use warnings;
 use WWW::Mechanize;
 use List::MoreUtils qw(uniq);
 use Getopt::Long qw(GetOptions);
-use Data::Dumper;
 use JSON::PP;
 
 use v5.8.0;
