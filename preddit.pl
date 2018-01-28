@@ -39,11 +39,11 @@ my $json = JSON::PP->new()->decode($mech->content());
 
 my @links;
 
-foreach my $result (0..$limit - 1) {
+foreach my $result (0..$limit) {
     my $value = $json->{data}{children}[$result]{data}{url};
     if(defined($value) and $value =~ m/(youtube\.com\/watch)|(imgur|redd\.it).*\.(jpe?g|gifv?|png)$/i) {
         push @links, $value;
     }
 }
 
-print Dumper(uniq @links);
+print "$_\n" for uniq @links;
