@@ -21,7 +21,7 @@ my $sub;
 my $limit;
 
 GetOptions('sub=s' => \$sub,
-            'limit=i' => \          $limit);
+            'limit=i' => \ $limit);
 
 if (!defined($sub)) {
     $sub = 'all';
