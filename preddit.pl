@@ -41,9 +41,9 @@ my @links;
 
 foreach my $result (0..$limit - 1) {
     my $value = $json->{data}{children}[$result]{data}{url};
-    if($value and $value =~ m/(youtube\.com\/watch)|(imgur|redd\.it).*\.(jpe?g|gifv?|png)$/i) {
+    if(defined($value) and $value =~ m/(youtube\.com\/watch)|(imgur|redd\.it).*\.(jpe?g|gifv?|png)$/i) {
         push @links, $value;
     }
 }
 
-print Dumper(@links);
+print Dumper(uniq @links);
