@@ -40,9 +40,9 @@ my @links;
 
 foreach my $result (0..$limit) {
     my $value = $json->{data}{children}[$result]{data}{url};
-    if(defined($value) and $value =~ m/(youtube\.com\/watch)|(imgur|redd\.it).*\.(jpe?g|gifv?|png)$/i) {
-        push @links, $value;
+    #(youtube\.com\/watch)|
+    if(defined($value) and $value =~ m/(imgur|redd\.it).*\.(jpe?g|gifv?|png)$/i) {
+        my $image = (split(/\//, $value))[-1];
+        $mech->get($value, ':content_file' => $image);
     }
 }
-
-print "$_\n" for uniq @links;
