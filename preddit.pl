@@ -8,14 +8,12 @@ use List::MoreUtils qw(uniq);
 use Getopt::Long qw(GetOptions);
 use JSON::PP;
 
-use v5.8.0;
-
 $ENV{PERL_LWP_SSL_VERIFY_HOSTNAME} = 0;
 
 my $mech = WWW::Mechanize->new();
 $mech->agent_alias('Mac Mozilla');
 
-#Provide a sub and limit to scrape on the command line. If no sub or limit provided, default to /r/all and 100
+# Provide a sub and limit to scrape on the command line. If no sub or limit provided, default to /r/all and 100
 my $sub;
 my $limit;
 
@@ -38,10 +36,11 @@ my $json = JSON::PP->new()->decode($mech->content());
 
 my @links;
 
+# Filter images posted to imgur and Reddit and download them
 foreach my $result (0..$limit) {
     my $value = $json->{data}{children}[$result]{data}{url};
     #(youtube\.com\/watch)|
-    if(defined($value) and $value =~ m/(imgur|redd\.it).*\.(jpe?g|gifv?|png)$/i) {
+    if(defined($value) and $value =~ m/(imgur|redd\.it).*\.(jpe?g|gif|png)$/i) {
         my $image = (split(/\//, $value))[-1];
         $mech->get($value, ':content_file' => $image);
     }
