@@ -1,5 +1,9 @@
 #!/usr/bin/perl
 
+# Scrapes a given subreddit with a given limit
+# and downloads the JPG, JPEG, GIF, and PNG files
+# found.
+
 use strict;
 use warnings;
 
